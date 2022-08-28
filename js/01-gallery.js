@@ -19,8 +19,19 @@ function createMarkup(items) {
     }).join('');
 };
 
-// const instance = basicLightbox.create(`
-//     <img src="assets/images/image.png" width="800" height="600">
-// `)
+gallery.addEventListener('click', onGalleryClick);
 
-// instance.show()
+function onGalleryClick(e) { 
+    e.preventDefault();
+    if (e.target.nodeName !== "IMG") {
+        return;
+    };
+    const instance = basicLightbox.create(`<img src="${e.target.dataset.source}" width="800" height="800">`);
+    instance.show();
+
+    addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            instance.close();
+        }
+    });
+};
